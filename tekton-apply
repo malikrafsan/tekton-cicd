@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# list all the files in the directory `tekton/secrets`
+# for each file, create a secret in the cluster
+files=$(ls tekton/secrets)
+for file in $files
+do
+  echo "Creating secret $file"
+  kubectl apply -f tekton/secrets/$file
+done
+
+
+# list all the files in the directory `tekton/serviceAccount`
+# for each file, create a service account in the cluster
+files=$(ls tekton/serviceAccount)
+for file in $files
+do
+  echo "Creating service account $file"
+  kubectl apply -f tekton/serviceAccount/$file
+done
+
+
+# list all the files in the directory `tekton/tasks`
+# for each file, create a task in the cluster
+files=$(ls tekton/tasks)
+for file in $files
+do
+  echo "Creating task $file"
+  kubectl apply -f tekton/tasks/$file
+done
+
+# list all the files in the directory `tekton/pipeline`
+# for each file, create a pipeline in the cluster
+files=$(ls tekton/pipeline)
+for file in $files
+do
+  echo "Creating pipeline $file"
+  kubectl apply -f tekton/pipeline/$file
+done

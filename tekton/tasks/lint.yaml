@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: lint-code
+spec:
+  description: 
+  workspaces:
+  - name: source
+  steps:
+  - name: lint
+    image: golangci/golangci-lint:latest-alpine
+    workingDir: $(workspaces.source.path)
+    command:
+      - sh
+    args:
+      - -c
+      - |
+        golangci-lint run

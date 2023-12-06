@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: unit-test
+spec:
+  description: 
+  workspaces:
+  - name: source
+  steps:
+  - name: unit-test
+    image: golang:1.21-alpine
+    workingDir: $(workspaces.source.path)
+    command:
+      - sh
+    args:
+      - -c
+      - |
+        go test -v ./...
+
